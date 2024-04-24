@@ -1,0 +1,119 @@
+swagger: '2.0'
+info:
+  title: Flask API
+  description: API documentation for Flask application
+  version: '1.0'
+host: localhost:5000
+schemes:
+  - http
+paths:
+  /:
+    get:
+      summary: Endpoint raiz
+      description: Retorna uma saudação básica.
+      responses:
+        '200':
+          description: OK
+  /login:
+    get:
+      summary: Página de login
+      description: Retorna a página de login.
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Login do usuário
+      description: Autentica o usuário e retorna um token JWT.
+      parameters:
+        - in: formData
+          name: username
+          type: string
+          required: true
+          description: Nome de usuário
+        - in: formData
+          name: password
+          type: string
+          required: true
+          description: Senha do usuário
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Credenciais inválidas
+  /register:
+    get:
+      summary: Página de registro
+      description: Retorna a página de registro.
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Registro do usuário
+      description: Registra um novo usuário.
+      parameters:
+        - in: formData
+          name: username
+          type: string
+          required: true
+          description: Nome de usuário
+        - in: formData
+          name: password
+          type: string
+          required: true
+          description: Senha do usuário
+      responses:
+        '200':
+          description: OK
+  /playlist:
+    get:
+      summary: Lista de reprodução
+      description: Retorna a lista de reprodução do usuário.
+      security:
+        - JWT: []
+      responses:
+        '200':
+          description: OK
+    post:
+      summary: Adicionar conteúdo à lista de reprodução
+      description: Adiciona um novo item à lista de reprodução.
+      parameters:
+        - in: formData
+          name: post_name
+          type: string
+          required: true
+          description: Nome do item
+        - in: formData
+          name: post_content
+          type: string
+          required: true
+          description: Conteúdo do item
+      responses:
+        '200':
+          description: OK
+  /error:
+    get:
+      summary: Página de erro
+      description: Retorna a página de erro.
+      responses:
+        '200':
+          description: OK
+  /token:
+    post:
+      summary: Gerar token JWT
+      description: Gera um token JWT para autenticação.
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Credenciais inválidas

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Maker</title>
+</head>
+<body>
+    <h1>Playlist</h1>
+    <form action="http://localhost:5000/content" method="POST">
+        <label for="post_name">Artist Name</label>
+        <input type="text" name="post_name" id="post_name" required><br><br>
+        <label for="post_content">Music Name</label>
+        <input type="text" name="post_content" id="post_content" required>
+        <input type="submit" value="Adicionar Musica"><br><br>
+        <label for="post_id">Music ID</label>
+        <input type="number" name="post_id" id="post_id">
+        <input type="submit" value="Edit Music" formaction="http://localhost:5000/edit_content">
+        <input type="submit" value="Delete Music" formaction="http://localhost:5000/delete_content"><br><br>
+    </form><br>
+    <button onClick="window.location.reload();">Refresh Page</button>
+    <br>
+    <br>
+    <div>
+    {% for i in all_posts %}
+    id: {{ i["id"] }} <br>
+    {{ i["post_name"] }}<br>
+    {{ i["post_content"] }}<br>
+    <hr style="width:20%;text-align:left;margin-left:0">
+    {% endfor %}
+    </div>
+</body>
+</html>
